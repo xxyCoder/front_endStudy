@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue2</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</head>
+
+<body>
+    <div id="app">
+        <component-a></component-a>
+        <component-a>save</component-a>
+        <component-b>
+            <template v-slot:header>
+                <h1>HEADER</h1>
+            </template>
+            <!-- 任何没有被包裹在带有 v-slot 的 <template> 中的内容都会被视为默认插槽的内容。 -->
+            <p>123</p>
+            <p>456</p>
+            <template v-slot:footer>
+                <h2>FOOTER</h2>
+            </template>
+        </component-b>
+    </div>
+    <script>
+        // 局部注册
+        let ComponentA = {
+            template: `
+                <button type="submit">
+                    <slot>submit</slot>
+                </button>
+            `
+        };
+        let ComponentB = {
+            template: `
+                <div class="container">
+                    <header>
+                        <slot name="header"></slot>
+                    </header>
+                    <main>
+                        <slot></slot>
+                    </main>
+                    <footer>
+                        <slot name="footer"></slot>
+                    </footer>
+                </div>
+            `
+        };
+        let ComponentC = {
+            template: `
+                
+            `
+        }
+        new Vue({
+            el: '#app',
+            components: {
+                'component-a': ComponentA,
+                'component-b': ComponentB
+            }
+        });
+
+    </script>
+</body>
+
+</html>
