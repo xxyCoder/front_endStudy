@@ -7,6 +7,7 @@
 ## 粒度
 - 中等粒度，一个状态所绑定的不是一个具体的DOM节点，而是一个包含该节点的组件
 - 变化之后，通知组件，组件内部可以使用虚拟DOM进行比对，从而降低依赖追踪所消耗的内存
+1. 对象
 ## 追踪变化
 - Object.defineProperty()
 - 将一个普通对象传入vue实例对象作为data选项，vue将遍历此对象所有的property，并使用Object.defineProperty把所有属性转换为getter/setter
@@ -19,3 +20,15 @@
 ## 对象侦测
                       转换成getter/setter                         通知依赖        通知Watcher
 - Data ---> Observer ---------------------> data getter setter  ----------> Dep ------------> Watcher
+
+2. 数组
+## 为什么不能像对象那样使用getter/setter的实现方式
+- 对于数组可以使用该原型上的方法来修改，getter/setter不会被触发
+- 通过覆盖原型方法来拦截原型方法
+## 追踪
+- 修改内容是通过方法，所以和对象追踪不一样，通过创建拦截器去覆盖原型的方式来追踪
+- 在getter中收集依赖，在拦截器中触发依赖，故依赖收集存放在Observer实例对象上，这样getter和拦截器都可以访问到
+- 访问数组的时候肯定会触发数组这个属性  
+    list = [1,2,3]
+    this.list
+    
