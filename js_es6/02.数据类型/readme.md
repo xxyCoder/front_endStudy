@@ -12,3 +12,10 @@
         - 但是和Symbol()注册的不同
         - Symbol.keyFor() 查询全局注册表
             查询符号实例，返回对应描述符（字符）
+## 内置符号
+    - Symbol.asyncIterator 异步迭代器API函数
+    - Symbol.hasInstance 一个方法，该方法决定一个构造器对象是否认可一个对象是它的实例 由instanceof操作符使用
+    - Symbol.isConcatSpreadable 如果是true表示对象应该用Array.prototype.concat() 打平数组
+    - Symbol.iterator 返回对象的默认的迭代器 由for-of调用
+    - Symbol.match 一个正则表达式方法 由String.prototype.match() 方法使用
+    - Symbol.replace 正则表达式
